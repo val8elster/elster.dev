@@ -1,155 +1,289 @@
 :root {
-    --radius: 14px;
-    --transition: 0.3s ease;
     --bg: #e6e4c8;
-    --fg: #446865;
+    --card-bg: #bbb9a2;
+    --fg: #22322e;
+    --special-fg: #22322e;
+    --fg-light: #2f423c;
+    --accent: #3a7f72;
+    --radius: 6px;
+    --grid: rgba(0, 0, 0, 0.05);
 }
 
 html.dark-mode {
-    --bg: #446865;
+    --bg: #0e1210;
+    --card-bg: #22322e;
     --fg: #e6e4c8;
+    --special-fg: #22322e;
+    --fg-light: #e6e4c8;
+    --accent: #5fe0c2;
+    --grid: rgba(255,255,255,0.03);
 }
 
 body {
+    background-color: var(--bg);
+    color: var(--fg-light);
+    font-family: "JetBrains Mono", monospace;
     margin: 0;
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    background: var(--bg);
-    color: var(--fg);
-    transition: background var(--transition), color var(--transition);
-    line-height: 1.6;
+    overflow-x: hidden;
+    line-height: 1.5;
+    background-image:
+            linear-gradient(to right, var(--grid) 1px, transparent 1px),
+            linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+    background-size: 40px 40px;
 }
 
-.material-icons {
-    vertical-align: middle;
-    font-size: 1.2rem;
-    transition: transform .2s ease, opacity .2s ease;
-}
-
-
-/* ---------- Layout ---------- */
 .header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
-    border-bottom: 1px solid color-mix(in oklab, var(--fg) 30%, transparent);
-    background: color-mix(in oklab, var(--bg) 80%, transparent);
-    position: sticky;
-    top: 0;
+    padding: 0.8rem 2rem;
+    gap: 1.5rem;
+
+    background: rgba(30, 40, 35, 0.55);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: background 0.4s ease, border-color 0.3s ease;
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-weight: 700;
+body:not(.dark-mode) .header {
+    background: rgba(255, 255, 245, 0.45);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-.avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-}
-
-nav a {
-    margin-left: 1rem;
-    text-decoration: none;
-    color: inherit;
-    font-weight: 500;
-}
-
-nav a:hover {
-    text-decoration: underline;
-}
-
-#theme-toggle {
-    margin-left: 1rem;
-    border: 1px solid currentColor;
-    border-radius: 999px;
-    background: transparent;
-    color: inherit;
-    cursor: pointer;
-    padding: 0.3rem 0.7rem;
-}
-
-main {
-    max-width: 900px;
-    margin: 2rem auto;
-    padding: 0 1.5rem;
-}
-
-h1, h2 {
-    line-height: 1.2;
-}
-
-h1 {
-    font-size: 2rem;
-    margin-bottom: 0.3rem;
-}
-
-.lead {
-    font-size: 1.05rem;
-    max-width: 60ch;
-}
-
-/* ---------- Projects ---------- */
-.projects .grid {
-    display: grid;
-    gap: 1rem;
-}
-
-@media (min-width: 700px) {
-    .projects .grid {
-        grid-template-columns: repeat(3, 1fr);
+@supports (backdrop-filter: blur(10px)) {
+    body.scrolled .header {
+        background: rgba(30, 40, 35, 0.35);
+        transition: background 0.3s ease;
     }
 }
 
-.card {
-    border: 1px solid color-mix(in oklab, var(--fg) 20%, transparent);
-    border-radius: var(--radius);
-    overflow: hidden;
-    background: color-mix(in oklab, var(--bg) 90%, transparent);
-    transition: transform 0.2s ease;
+/* Logo area */
+.header .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
-
-html.dark-mode .card {
-    border: 1px solid color-mix(in oklab, var(--fg) 30%, transparent);
-    background: color-mix(in oklab, var(--bg) 80%, transparent);
-    color: color-mix(in oklab, var(--fg) 80%, transparent);
-    transition: transform 0.2s ease;
-}
-
-.card img {
-    width: 100%;
-    height: 160px;
+.header .logo img {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
     object-fit: contain;
+    transition: transform 0.25s ease;
+}
+.header .logo img:hover {
+    transform: scale(1.05) rotate(6deg);
+}
+.header .logo span {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--fg);
 }
 
-.card h3 {
-    margin: 0.6rem 1rem 0;
+/* Nav links */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+}
+.nav-links a {
+    text-decoration: none;
+    color: var(--fg);
+    font-weight: 600;
+    position: relative;
+    transition: color 0.25s ease;
+}
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.25s ease;
+}
+.nav-links a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+.nav-links a:hover {
+    color: var(--accent);
 }
 
-.card p {
-    margin: 0.4rem 1rem 1rem;
+/* Theme toggle button */
+#theme-toggle {
+    border: 1px solid color-mix(in oklab, var(--fg) 30%, transparent);
+    border-radius: 8px;
+    background: color-mix(in oklab, var(--bg) 85%, transparent);
+    color: var(--fg);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    backdrop-filter: blur(8px);
+}
+#theme-toggle:hover {
+    border-color: var(--accent);
+    background: color-mix(in oklab, var(--bg) 60%, var(--accent) 8%);
+    transform: translateY(-1px);
+}
+#theme-icon {
+    font-size: 1.3rem;
+    line-height: 1;
 }
 
-.card:hover {
-    transform: translateY(-3px);
+/* Light mode: subtle shadows and readable text */
+body:not(.dark-mode) {
+    background-color: var(--bg);
+    color: var(--fg-light);
+    background-image:
+            linear-gradient(to right, var(--grid) 1px, transparent 1px),
+            linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+    background-size: 40px 40px;
 }
 
-/* ---------- Other sections ---------- */
-section {
+/* Header glass effect adjustment */
+body:not(.dark-mode) .header {
+    background: color-mix(in oklab, var(--bg) 94%, white 8%);
+    border-bottom: 1px solid color-mix(in oklab, var(--fg) 15%, transparent);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Logo + nav color balance */
+body:not(.dark-mode) .header .logo span,
+body:not(.dark-mode) .nav-links a,
+body:not(.dark-mode) #theme-toggle {
+    color: var(--fg);
+}
+body:not(.dark-mode) .nav-links a:hover {
+    color: var(--accent);
+}
+
+/* Project cards: warmer background, soft border */
+body:not(.dark-mode) .grid article {
+    background: var(--card-bg);
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+}
+body:not(.dark-mode) .grid article:hover {
+    box-shadow: 0 5px 14px rgba(0,0,0,0.1);
+}
+
+/* Hero adjustments */
+body:not(.dark-mode) .hero h1 {
+    color: var(--accent);
+}
+body:not(.dark-mode) .hero p {
+    color: var(--fg-light);
+    opacity: 0.85;
+}
+
+/* Footer contrast */
+body:not(.dark-mode) footer {
+    border-top: 1px solid rgba(0,0,0,0.1);
+    color: var(--fg);
+    opacity: 0.8;
+}
+
+.hero {
+    text-align: center;
+    padding: 5rem 2rem 3rem;
+}
+.hero h1 {
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    font-weight: 600;
+    color: var(--accent);
+}
+.hero p {
+    max-width: 60ch;
+    margin: 1rem auto 0;
+    color: var(--fg-light);
+    opacity: .85;
+}
+
+h2 {
+    color: var(--accent);
+    border-left: 3px solid var(--accent);
+    padding-left: .5rem;
     margin-top: 3rem;
 }
 
-footer {
-    text-align: center;
-    padding: 2rem 1rem;
-    border-top: 1px solid color-mix(in oklab, var(--fg) 30%, transparent);
-    font-size: 0.9rem;
+/* ---------- Projects Grid ---------- */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0 4rem;
 }
 
-/* ---------- Light/Dark PNG swap ---------- */
+/* Each project card */
+.grid article {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.2rem 1.6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.grid article:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 12px rgba(95, 224, 194, 0.2);
+    transform: translateY(-4px);
+}
+
+/* Images inside cards */
+.card img {
+    width: 100%;
+    max-width: 220px;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    border-radius: var(--radius);
+    background: rgba(255,255,255,0.02);
+    padding: 0.6rem;
+    transition: opacity 0.25s ease;
+}
+
+/* Text */
+.card h3 {
+    color: var(--accent);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0.3rem 0;
+}
+
+.card p {
+    color: var(--fg-light);
+    opacity: 0.85;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 30ch;
+}
+
+section {
+    padding: 3rem 2rem;
+}
+
+/* Light/Dark PNG swap (keep at the end of CSS) */
 .mode-light,
 .mode-dark {
     display: block;
@@ -164,4 +298,51 @@ footer {
     html:not(.dark-mode) .mode-dark  { display: block !important; }
 }
 
+:root {
+    --glass-bg: rgba(255, 255, 245, 0.48);  /* light mode glass */
+    --glass-border: rgba(0, 0, 0, 0.08);
+}
+html.dark-mode {
+    --glass-bg: rgba(16, 20, 18, 0.42);     /* dark mode glass */
+    --glass-border: rgba(255, 255, 255, 0.08);
+}
 
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    isolation: isolate;               /* needed so ::before sits behind content */
+    background: transparent !important; /* prevent opaque fills from earlier rules */
+}
+
+.header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+
+    /* translucent layer + blur */
+    background: var(--glass-bg);
+    border-bottom: 1px solid var(--glass-border);
+
+    /* Real glass when supported */
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+
+    /* subtle depth */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    pointer-events: none;
+    transition: background 0.35s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Fallback if backdrop-filter unsupported: increase translucency a touch */
+@supports not (backdrop-filter: blur(1px)) {
+    .header::before {
+        background: color-mix(in oklab, var(--glass-bg) 80%, transparent);
+    }
+}
+
+/* Optional: make it slightly clearer when scrolling */
+body.scrolled .header::before {
+    background: color-mix(in oklab, var(--glass-bg) 80%, transparent);
+}

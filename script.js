@@ -32,3 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// Fade header transparency while scrolling
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+        document.body.classList.add('scrolled');
+    } else {
+        document.body.classList.remove('scrolled');
+    }
+});
+
