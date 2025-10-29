@@ -15,8 +15,7 @@
 <header class="container-fluid header glass">
     <nav class="container flex-nav">
         <div class="logo">
-            <img src="assets/elster_circle.png" alt="Logo" class="avatar mode-light" />
-            <img src="assets/elster_circle.png" alt="" class="avatar mode-dark" />
+            <img src="assets/elster_circle.png" alt="Logo" class="avatar" />
             <strong>elster.dev</strong>
         </div>
         <nav class="nav-links">
@@ -31,7 +30,12 @@
 </header>
 
 <main class="container">
-    <section class="hero text-center">
+    <section class="hero text-center" data-tab="README.md">
+        <div class="tabbar">
+            <div class="tab">package.json</div>
+            <div class="tab">.gitignore</div>
+            <div class="tab active">README.md</div>
+        </div>
         <h1><span class="accent">I build</span> useful software<br>and run my own stack.</h1>
         <p class="lead">
             Personal portfolio and documentation of self-hosted infrastructure —
@@ -39,7 +43,13 @@
         </p>
     </section>
 
-    <section id="projects">
+    <section id="projects" data-tab="projects.py">
+        <div class="tabbar">
+            <div class="tab active">projects.py</div>
+            <div class="tab">spooly.java</div>
+            <div class="tab">bink.py</div>
+            <div class="tab">athena.kt</div>
+        </div>
         <h2>Projects</h2>
         <div class="grid">
             <article class="card">
@@ -65,7 +75,12 @@
         </div>
     </section>
 
-    <section id="lab">
+    <section id="lab" data-tab="infrastructure.yaml">
+        <div class="tabbar">
+            <div class="tab">lab.yaml</div>
+            <div class="tab active">infrastructure.yaml</div>
+            <div class="tab">uptime.json</div>
+        </div>
         <h2>My Lab</h2>
         <p>
             Authentik SSO, MinIO object storage, self-hosted mail, and monitoring with Grafana & Kuma —
@@ -73,7 +88,11 @@
         </p>
     </section>
 
-    <section id="about">
+    <section id="about" data-tab="about.txt">
+        <div class="tabbar">
+            <div class="tab">license</div>
+            <div class="tab active">about.txt</div>
+        </div>
         <h2>About Me</h2>
         <p>
             I’m a software engineer fascinated by automation, embedded systems, and self-hosting.

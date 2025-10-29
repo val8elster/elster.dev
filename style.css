@@ -6,7 +6,6 @@
     --fg-light: #2f423c;
     --accent: #3a7f72;
     --radius: 6px;
-    --grid: rgba(0, 0, 0, 0.05);
 }
 
 html.dark-mode {
@@ -16,7 +15,6 @@ html.dark-mode {
     --special-fg: #22322e;
     --fg-light: #e6e4c8;
     --accent: #5fe0c2;
-    --grid: rgba(255,255,255,0.03);
 }
 
 body {
@@ -26,10 +24,6 @@ body {
     margin: 0;
     overflow-x: hidden;
     line-height: 1.5;
-    background-image:
-            linear-gradient(to right, var(--grid) 1px, transparent 1px),
-            linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
-    background-size: 40px 40px;
 }
 
 .header {
@@ -147,10 +141,6 @@ body:not(.dark-mode) .header {
 body:not(.dark-mode) {
     background-color: var(--bg);
     color: var(--fg-light);
-    background-image:
-            linear-gradient(to right, var(--grid) 1px, transparent 1px),
-            linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
-    background-size: 40px 40px;
 }
 
 /* Header glass effect adjustment */
@@ -342,7 +332,177 @@ html.dark-mode {
     }
 }
 
-/* Optional: make it slightly clearer when scrolling */
 body.scrolled .header::before {
     background: color-mix(in oklab, var(--glass-bg) 80%, transparent);
+}
+
+section {
+    position: relative;
+    max-width: 1000px;
+    margin: 4rem auto;
+    padding: 2.6rem 2rem 2rem;
+    border-radius: var(--radius);
+    background: color-mix(in oklab, var(--bg) 94%, transparent);
+    border: 1px solid color-mix(in oklab, var(--fg) 20%, transparent);
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+section + section {
+    margin-top: 6rem;
+}
+
+
+section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2.2rem;
+    display: block;
+    background: color-mix(in oklab, var(--accent) 6%, transparent);
+    border-bottom: 1px solid color-mix(in oklab, var(--fg) 20%, transparent);
+    border-top-left-radius: var(--radius);
+    border-top-right-radius: var(--radius);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.tabbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: flex-end;
+    gap: 0.4rem;
+    padding: 0.35rem 0.8rem 0;
+    height: 2.3rem;
+    z-index: 3;
+}
+
+.tab {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 0.4rem 1rem 0.3rem;
+    border-radius: var(--radius) var(--radius) 0 0;
+    background: color-mix(in oklab, var(--accent) 8%, var(--bg) 85%);
+    border: 1px solid color-mix(in oklab, var(--fg) 25%, transparent);
+    border-bottom: none;
+    color: color-mix(in oklab, var(--accent) 65%, var(--fg));
+    opacity: 0.6;
+    cursor: default;
+    transition: all 0.25s ease;
+    margin-bottom: 0.45rem;
+}
+
+.tab:hover {
+    opacity: 0.8;
+    background: color-mix(in oklab, var(--accent) 15%, var(--bg) 80%);
+}
+
+.tab.active {
+    background: color-mix(in oklab, var(--bg) 94%, var(--fg) 2%);
+    color: var(--fg);
+    opacity: 1;
+    z-index: 4;
+    border: 1px solid color-mix(in oklab, var(--fg) 25%, transparent);
+    border-bottom: none;
+    border-radius: var(--radius) var(--radius) 0 0;
+    position: relative;
+    margin-bottom: 0.4rem;
+    box-shadow: 0 1px 0 color-mix(in oklab, var(--bg) 94%, var(--fg) 6%);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.tab.active::after {
+    content: "×";
+    font-weight: 400;
+    font-size: 0.9rem;
+    margin-left: 0.4rem;
+    color: color-mix(in oklab, var(--fg) 70%, transparent);
+    cursor: pointer;
+    transition: color 0.25s ease;
+}
+.tab.active::after:hover {
+    color: var(--accent);
+}
+
+body:not(.dark-mode) .tab {
+    background: color-mix(in oklab, var(--bg) 80%, white 10%);
+    color: color-mix(in oklab, var(--fg) 70%, var(--accent));
+    opacity: 0.7;
+}
+body:not(.dark-mode) .tab.active {
+    background: color-mix(in oklab, var(--bg) 96%, white 3%);
+    color: var(--fg);
+}
+body:not(.dark-mode) .tab.active::after {
+    color: color-mix(in oklab, var(--fg) 60%, transparent);
+}
+
+:root {
+    --section-bg: color-mix(in oklab, var(--bg) 96%, var(--fg) 2%);
+}
+html.dark-mode {
+    --section-bg: color-mix(in oklab, var(--bg) 95%, var(--fg) 4%);
+}
+
+section {
+    background: var(--section-bg);
+}
+
+.tab.active {
+    background: var(--section-bg);
+    color: var(--fg);
+    opacity: 1;
+    z-index: 4;
+    border: 1px solid color-mix(in oklab, var(--fg) 30%, transparent);
+    border-bottom: none;
+    border-radius: var(--radius) var(--radius) 0 0;
+    position: relative;
+    margin-bottom: 0.4rem;
+    box-shadow: 0 1px 0 var(--section-bg);
+}
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    animation: particlesMove 60s linear infinite;
+    opacity: 0.15;
+}
+
+body::before {
+    background-image:
+            radial-gradient(circle 1px at 10% 20%, var(--accent) 100%, transparent 0),
+            radial-gradient(circle 1px at 80% 70%, var(--accent) 100%, transparent 0),
+            radial-gradient(circle 1px at 40% 90%, var(--accent) 100%, transparent 0),
+            radial-gradient(circle 1px at 70% 40%, var(--accent) 100%, transparent 0),
+            radial-gradient(circle 1px at 30% 30%, var(--accent) 100%, transparent 0);
+    animation-duration: 90s;
+}
+
+body::after {
+    background-image:
+            radial-gradient(circle 2px at 20% 80%, var(--accent) 100%, transparent 0),
+            radial-gradient(circle 2px at 60% 25%, var(--accent) 100%, transparent 0),
+            radial-gradient(circle 2px at 85% 50%, var(--accent) 100%, transparent 0);
+    animation-duration: 120s;
+    opacity: 0.08;
+}
+
+@keyframes particlesMove {
+    0%   { background-position: 0 0, 0 0; }
+    50%  { background-position: 100px 200px, -100px 100px; }
+    100% { background-position: 0 0, 0 0; }
 }
