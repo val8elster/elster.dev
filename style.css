@@ -1,0 +1,167 @@
+:root {
+    --radius: 14px;
+    --transition: 0.3s ease;
+    --bg: #e6e4c8;
+    --fg: #446865;
+}
+
+html.dark-mode {
+    --bg: #446865;
+    --fg: #e6e4c8;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    transition: background var(--transition), color var(--transition);
+    line-height: 1.6;
+}
+
+.material-icons {
+    vertical-align: middle;
+    font-size: 1.2rem;
+    transition: transform .2s ease, opacity .2s ease;
+}
+
+
+/* ---------- Layout ---------- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid color-mix(in oklab, var(--fg) 30%, transparent);
+    background: color-mix(in oklab, var(--bg) 80%, transparent);
+    position: sticky;
+    top: 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 700;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+nav a {
+    margin-left: 1rem;
+    text-decoration: none;
+    color: inherit;
+    font-weight: 500;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+#theme-toggle {
+    margin-left: 1rem;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    padding: 0.3rem 0.7rem;
+}
+
+main {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+h1, h2 {
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 0.3rem;
+}
+
+.lead {
+    font-size: 1.05rem;
+    max-width: 60ch;
+}
+
+/* ---------- Projects ---------- */
+.projects .grid {
+    display: grid;
+    gap: 1rem;
+}
+
+@media (min-width: 700px) {
+    .projects .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.card {
+    border: 1px solid color-mix(in oklab, var(--fg) 20%, transparent);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: color-mix(in oklab, var(--bg) 90%, transparent);
+    transition: transform 0.2s ease;
+}
+
+html.dark-mode .card {
+    border: 1px solid color-mix(in oklab, var(--fg) 30%, transparent);
+    background: color-mix(in oklab, var(--bg) 80%, transparent);
+    color: color-mix(in oklab, var(--fg) 80%, transparent);
+    transition: transform 0.2s ease;
+}
+
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: contain;
+}
+
+.card h3 {
+    margin: 0.6rem 1rem 0;
+}
+
+.card p {
+    margin: 0.4rem 1rem 1rem;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+/* ---------- Other sections ---------- */
+section {
+    margin-top: 3rem;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    border-top: 1px solid color-mix(in oklab, var(--fg) 30%, transparent);
+    font-size: 0.9rem;
+}
+
+/* ---------- Light/Dark PNG swap ---------- */
+.mode-light,
+.mode-dark {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.mode-dark { display: none !important; }
+
+@media (prefers-color-scheme: dark) {
+    html:not(.dark-mode) .mode-light { display: none !important; }
+    html:not(.dark-mode) .mode-dark  { display: block !important; }
+}
+
+

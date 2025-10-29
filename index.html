@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>elster.dev</title>
+    <meta name="description" content="Personal portfolio and private infrastructure lab by v.">
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="script.js" defer></script>
+
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+</head>
+<body>
+<header class="header">
+    <div class="logo">
+        <img src="assets/elster_circle.png" alt="Logo" class="avatar" />
+        <span>elster.dev</span>
+    </div>
+    <nav>
+        <a href="#projects">Projects</a>
+        <a href="#lab">Lab</a>
+        <a href="#about">About</a>
+        <button id="theme-toggle" aria-label="Toggle theme">
+            <span class="material-icons" id="theme-icon">brightness_1</span>
+        </button>
+    </nav>
+</header>
+
+<main>
+    <section class="hero">
+        <h1>I build useful software and run my own stack.</h1>
+        <p class="lead">
+            This website is my personal showcase. My IAM, Mail, and MinIO services
+            are private—documented here for transparency and fun.
+        </p>
+    </section>
+
+    <section id="projects" class="projects">
+        <h2>Projects</h2>
+        <div class="grid">
+            <article class="card">
+                <img src="assets/spooly_light.png" alt="Spooly" class="mode-light"/>
+                <img src="assets/spooly_dark.png" alt="Spooly" class="mode-dark"/>
+                <h3>Spooly</h3>
+                <p>Filament spool manager with barcode scanning, MariaDB, and a modern GUI.</p>
+            </article>
+            <article class="card">
+                <img src="assets/bink_light.png" alt="B-IN-K" class="mode-light"/>
+                <img src="assets/bink_dark.png" alt="B-IN-K" class="mode-dark"/>
+                <h3>B-IN-K</h3>
+                <p>Custom Byte-Keyboard for Raspberry Pi Pico W — 8-bit input, OLED display.</p>
+            </article>
+            <article class="card">
+                <img src="assets/athena_light.png" alt="athena" class="mode-light"/>
+                <img src="assets/athena_dark.png" alt="athena" class="mode-dark"/>
+                <h3>athena</h3>
+                <p>Library application for maintaining larger book collections with barcode scanning.</p>
+            </article>
+
+        </div>
+    </section>
+
+    <section id="lab" class="lab">
+        <h2>My Lab</h2>
+        <p>
+            I maintain a personal stack for learning and reliability testing:
+            <strong>Authentik IAM</strong>, <strong>Mail (Rspamd + Dovecot)</strong>,
+            <strong>MinIO S3</strong>, and <strong>Uptime Kuma</strong>.
+            Access is private, but I document setup and architecture publicly.
+        </p>
+    </section>
+
+    <section id="about" class="about">
+        <h2>About Me</h2>
+        <p>
+            I’m a software engineer fascinated by self-hosted infrastructure, embedded systems, and automation.
+            This website is static—no frameworks, no tracking, no nonsense.
+        </p>
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 v · Hosted on my own infrastructure</p>
+</footer>
+</body>
+</html>
