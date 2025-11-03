@@ -32,72 +32,104 @@
 <main class="container">
     <section class="hero text-center" data-tab="README.md">
         <div class="tabbar">
-            <div class="tab">package.json</div>
-            <div class="tab">.gitignore</div>
-            <div class="tab active">README.md</div>
+            <div class="tab" data-file="package.json">
+                package.json
+                <span class="tab-close" aria-label="Close tab" title="Close">
+                    ×
+                </span>
+            </div>
+            <div class="tab" data-file=".gitignore">
+                .gitignore
+                <span class="tab-close" aria-label="Close tab" title="Close">
+                    ×
+                </span>
+            </div>
+            <div class="tab" data-file="README.md">
+                README.md
+                <span class="tab-close" aria-label="Close tab" title="Close">
+                    ×
+                </span>
+            </div>
         </div>
-        <h1><span class="accent">I build</span> useful software<br>and run my own stack.</h1>
-        <p class="lead">
-            Personal portfolio and documentation of self-hosted infrastructure —
-            a mix of AI, automation, and embedded projects.
-        </p>
+        <pre class="editor-area" id="editor"></pre>
     </section>
 
     <section id="projects" data-tab="projects.py">
         <div class="tabbar">
-            <div class="tab active">projects.py</div>
-            <div class="tab">spooly.java</div>
-            <div class="tab">bink.py</div>
-            <div class="tab">athena.kt</div>
+            <div class="tab" data-file="projects.py">
+                projects.py
+                <span class="tab-close" aria-label="Close tab" title="Close">
+                    ×
+                </span>
+            </div>
+            <div class="tab" data-file="spooly.java">
+                spooly.java
+                <span class="tab-close" aria-label="Close tab" title="Close">
+                    ×
+                </span>
+            </div>
+            <div class="tab" data-file="bink.py">
+                bink.py
+                <span class="tab-close" aria-label="Close tab" title="Close">
+                    ×
+                </span>
+            </div>
+            <div class="tab" data-file="athena.kt">
+                athena.kt
+                <span class="tab-close" aria-label="Close tab" title="Close">
+                    ×
+                </span>
+            </div>
         </div>
-        <h2>Projects</h2>
-        <div class="grid">
-            <article class="card">
-                <img src="assets/spooly_light.png" alt="Spooly" class="mode-light">
-                <img src="assets/spooly_dark.png" alt="Spooly" class="mode-dark">
-                <h3>Spooly</h3>
-                <p>Filament spool manager with barcode scanning and MariaDB backend.</p>
-            </article>
-
-            <article class="card">
-                <img src="assets/bink_light.png" alt="B-IN-K" class="mode-light">
-                <img src="assets/bink_dark.png" alt="B-IN-K" class="mode-dark">
-                <h3>B-IN-K</h3>
-                <p>Binary Input Node Keyboard for Pico W — 8-bit input, OLED display, and UPS HAT.</p>
-            </article>
-
-            <article class="card">
-                <img src="assets/athena_light.png" alt="athena" class="mode-light">
-                <img src="assets/athena_dark.png" alt="athena" class="mode-dark">
-                <h3>athena</h3>
-                <p>Library application.</p>
-            </article>
-        </div>
+        <pre class="editor-area" id="editor_projects"></pre>
     </section>
 
     <section id="lab" data-tab="infrastructure.yaml">
         <div class="tabbar">
-            <div class="tab">lab.yaml</div>
-            <div class="tab active">infrastructure.yaml</div>
-            <div class="tab">uptime.json</div>
+            <div class="tab" data-file="lab.yaml">
+                lab.yaml
+                <span class="tab-close" aria-label="Close tab" title="Close">
+                    ×
+                </span>
+            </div>
+            <div class="tab" data-file="infrastructure.yaml">
+                infrastructure.yaml
+                <span class="tab-close" aria-label="Close tab" title="Close">
+                    ×
+                </span>
+            </div>
+            <div class="tab" data-file="uptime.json">
+                uptime.json
+                <span class="tab-close" aria-label="Close tab" title="Close">
+                    ×
+                </span>
+            </div>
         </div>
-        <h2>My Lab</h2>
-        <p>
-            Authentik SSO, MinIO object storage, self-hosted mail, and monitoring with Grafana & Kuma —
-            everything connected under one secure domain.
-        </p>
+        <pre class="editor-area" id="editor_lab"></pre>
     </section>
 
     <section id="about" data-tab="about.txt">
         <div class="tabbar">
-            <div class="tab">license</div>
-            <div class="tab active">about.txt</div>
+            <div class="tab" data-file="license">
+                license
+                <span class="tab-close" aria-label="Close tab" title="Close">
+                    ×
+                </span>
+            </div>
+            <div class="tab" data-file="about.txt">
+                about.txt
+                <span class="tab-close" aria-label="Close tab" title="Close">
+                    ×
+                </span>
+            </div>
+            <div class="tab" data-file="contact.json">
+                contact.json
+                <span class="tab-close" aria-label="Close tab" title="Close">
+                    ×
+                </span>
+            </div>
         </div>
-        <h2>About Me</h2>
-        <p>
-            I’m a software engineer fascinated by automation, embedded systems, and self-hosting.
-            This site is fully static, privacy-friendly, and manually deployed via FTP.
-        </p>
+        <pre class="editor-area" id="editor_about"></pre>
     </section>
 </main>
 

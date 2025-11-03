@@ -419,18 +419,6 @@ section::before {
 }
 
 
-.tab.active::after {
-    content: "×";
-    font-weight: 400;
-    font-size: 0.9rem;
-    margin-left: 0.4rem;
-    color: color-mix(in oklab, var(--fg) 70%, transparent);
-    cursor: pointer;
-    transition: color 0.25s ease;
-}
-.tab.active::after:hover {
-    color: var(--accent);
-}
 
 body:not(.dark-mode) .tab {
     background: color-mix(in oklab, var(--bg) 80%, white 10%);
@@ -440,9 +428,6 @@ body:not(.dark-mode) .tab {
 body:not(.dark-mode) .tab.active {
     background: color-mix(in oklab, var(--bg) 96%, white 3%);
     color: var(--fg);
-}
-body:not(.dark-mode) .tab.active::after {
-    color: color-mix(in oklab, var(--fg) 60%, transparent);
 }
 
 :root {
@@ -505,4 +490,95 @@ body::after {
     0%   { background-position: 0 0, 0 0; }
     50%  { background-position: 100px 200px, -100px 100px; }
     100% { background-position: 0 0, 0 0; }
+}
+
+.editor-area {
+    background: var(--section-bg);
+    color: var(--fg-light);
+    font-family: "JetBrains Mono", monospace;
+    text-align: left;
+    padding: 1.5rem;
+    border-radius: 0 0 var(--radius) var(--radius);
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    min-height: 300px;
+    overflow-y: auto;
+}
+
+.tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+}
+
+.tab .tab-close {
+    display: none;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 0.9rem;
+    line-height: 1;
+    user-select: none;
+    color: color-mix(in oklab, var(--fg) 70%, transparent);
+}
+.tab.active .tab-close {
+    display: inline;
+}
+.tab.active .tab-close:hover {
+    color: var(--accent);
+}
+
+.tab .tab-close {
+    padding: 0 .2rem;
+    border-radius: 4px;
+}
+.tab.active .tab-close:hover {
+    background: color-mix(in oklab, var(--bg) 85%, var(--fg) 15%);
+}
+
+.terminal-prompt {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.9rem;
+    color: var(--accent);
+    background: color-mix(in oklab, var(--bg) 96%, var(--fg) 2%);
+    padding: 0.6rem 1rem;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    overflow: hidden;
+    user-select: none;
+}
+
+.cursor {
+    width: 0.6ch;
+    height: 1em;
+    background: var(--accent);
+    display: inline-block;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+.prompt-path {
+    color: color-mix(in oklab, var(--accent) 60%, var(--fg));
+}
+.prompt-dir {
+    color: color-mix(in oklab, var(--fg) 70%, var(--accent));
+}
+
+.prompt-cmd {
+    color: var(--fg-light);
+    margin-left: 0.4rem;
+}
+
+.editor-area {
+    transition: opacity 0.25s ease;
+}
+.editor-area.updating {
+    opacity: 0.3;
 }
