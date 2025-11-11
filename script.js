@@ -319,3 +319,33 @@ Motto: "Build it. Host it. Own it."`,
         }
     );
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const sections = document.querySelectorAll("section");
+
+    sections.forEach(section => {
+        const closeBtn = section.querySelector(".section-close");
+
+        if (closeBtn) {
+            closeBtn.addEventListener("click", () => {
+                section.classList.remove("active");
+            });
+        }
+    });
+
+    const projects = document.querySelector("#project-button");
+    projects.addEventListener("click", () => {
+        document.querySelector("#projects").classList.add("active");
+    })
+
+    const lab = document.querySelector("#lab-button");
+    lab.addEventListener("click", () => {
+        document.querySelector("#lab").classList.add("active");
+    })
+
+    const about = document.querySelector("#about-button");
+    about.addEventListener("click", () => {
+        document.querySelector("#about").classList.add("active");
+    })
+});
+

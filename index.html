@@ -19,9 +19,9 @@
             <strong>elster.dev</strong>
         </div>
         <nav class="nav-links">
-            <a href="#projects">Projects</a>
-            <a href="#lab">Lab</a>
-            <a href="#about">About</a>
+            <a href="#projects" id="project-button">Projects</a>
+            <a href="#lab" id="lab-button">Lab</a>
+            <a href="#about" id="about-button">About</a>
             <button id="theme-toggle" aria-label="Toggle theme">
                 <span class="material-icons" id="theme-icon">brightness_5</span>
             </button>
@@ -30,7 +30,7 @@
 </header>
 
 <main class="container">
-    <section class="hero text-center" data-tab="README.md">
+    <section class="hero text-center active" data-tab="README.md">
         <div class="tabbar">
             <div class="tab" data-file="package.json">
                 package.json
@@ -49,9 +49,6 @@
                 <span class="tab-close" aria-label="Close tab" title="Close">
                     ×
                 </span>
-            </div>
-            <div class="section-close" aria-label="Close section" title="Close">
-                ×
             </div>
         </div>
         <pre class="editor-area" id="editor"></pre>
@@ -117,7 +114,7 @@
         <pre class="editor-area" id="editor_lab"></pre>
     </section>
 
-    <section id="about" data-tab="about.txt" class="active">
+    <section id="about" data-tab="about.txt">
         <div class="tabbar">
             <div class="tab" data-file="license">
                 license
