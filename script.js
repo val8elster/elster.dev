@@ -240,16 +240,10 @@ sleep.log`
     self.stack = stack 
     self.summary = summary 
     projects = [ 
-        Project("Spooly", "Java + MariaDB", "Filament spool manager with barcode scanning."), 
         Project("B-IN-K", "CircuitPython + Pico W", "Binary input keyboard with OLED and UPS HAT."), 
         Project("Athena", "Kotlin + Spring + Angular", "Personal library and test-assistant app.") 
     ] 
     for p in projects: print(f"{p.name} → {p.summary}")`,
-            'spooly.java': `java public class Spooly { 
-    String purpose = "Manage 3D-printer filament spools"; 
-    boolean barcodeScanner = true; 
-    String db = "MariaDB"; 
-}`,
             'bink.py': `python class BINK: 
     controller = "Raspberry Pico W"
     buttons = 8 
