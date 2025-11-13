@@ -385,8 +385,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const headerH = header.getBoundingClientRect().height;
     const stopAt  = Math.max(0, headerH - title.offsetHeight - 16);
 
-    const BOOST  = 1;
-
     let locked  = false;
     let lastY   = 0;
     let ticking = false;
@@ -403,10 +401,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const y = lastY;
 
         if (!locked) {
-            const t = Math.min((y / lockThreshold) * BOOST, 1);
-            const offset  = Math.min(y, stopAt);
+            const t = Math.min((y / lockThreshold), 1);
 
             title.style.transform = `translate3d(0, 25vh, 0)`;
+            title.style.transition = 'transform 1.5s ease-out'
             title.style.opacity = `${1 - t * 0.08}`;
         }
 
