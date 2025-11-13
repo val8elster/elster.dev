@@ -1,3 +1,6 @@
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+
 document.addEventListener('DOMContentLoaded', () => {
     const root = document.documentElement;
     const icon = document.getElementById('theme-icon');
@@ -342,4 +345,107 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector("#about").classList.add("active");
     })
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('.header');
+    const brand  = document.querySelector('.logo.boot strong');
+    const nav    = document.querySelector('.nav-links');
+    let released = false;
+
+    header.classList.add('splash');
+
+    function flipRelease() {
+        header.classList.remove('splash');
+        header.classList.add('locked');
+
+        brand.style.transition = 'none';
+        brand.style.transform = 'translate3d(0, 0, 0)';
+
+        nav.animate([{opacity:0},{opacity:1}], {duration:450, delay:250, fill:'forwards'});
+    }
+
+    const threshold = window.innerHeight * 0.9;
+    window.addEventListener('scroll', () => {
+        if (!released && window.scrollY >= threshold) {
+            released = true;
+            flipRelease();
+        }
+    }, { passive: true });
+
+    const bootText = document.getElementById('bootText');
+    if (bootText) digitalDecode(bootText, 'elster.dev');
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('.header');
+    const title  = header.querySelector('.logo.boot strong');
+
+    const splashHeight      = window.innerHeight;
+    const lockThreshold     = splashHeight * 0.90;
+    const headerH = header.getBoundingClientRect().height;
+    const stopAt  = Math.max(0, headerH - title.offsetHeight - 16);
+
+    const BOOST  = 1;
+
+    let locked  = false;
+    let lastY   = 0;
+    let ticking = false;
+
+    function onScroll() {
+        lastY = window.scrollY;
+        if (!ticking) {
+            requestAnimationFrame(update);
+            ticking = true;
+        }
+    }
+
+    function update() {
+        const y = lastY;
+
+        if (!locked) {
+            const t = Math.min((y / lockThreshold) * BOOST, 1);
+            const offset  = Math.min(y, stopAt);
+
+            title.style.transform = `translate3d(0, 25vh, 0)`;
+            title.style.opacity = `${1 - t * 0.08}`;
+        }
+
+        if (!locked && y >= splashHeight - (3 * title.offsetHeight)) {
+            locked = true;
+            header.classList.add('locked');
+
+            title.style.transition = 'transform 0.5s ease-in-out, opacity 0.4s ease';
+            title.style.transform = 'translate3d(-35vw, 25vh, 0)';
+            title.style.opacity = '1';
+
+            setTimeout(() => {
+                title.style.transition = '';
+            }, 600);
+        }
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+});
+
+function digitalDecode(element, finalText) {
+    const chars = "!<>-_\\/[]{}—=+*^?#________";
+    let iterations = 0;
+    const original = finalText;
+    const scramble = setInterval(() => {
+        element.textContent = original
+            .split("")
+            .map((char, i) => {
+                if (i < iterations / 2) return original[i];
+                return chars[Math.floor(Math.random() * chars.length)];
+            })
+            .join("");
+
+        if (iterations >= original.length * 2) {
+            clearInterval(scramble);
+            element.textContent = original;
+        }
+        iterations += 1 / 2;
+    }, 40);
+}
 
