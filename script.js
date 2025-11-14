@@ -133,7 +133,23 @@ function initEditorTabs(scopeSelector, editorId, files, defaultText, meta) {
 
     function setDefault() {
         tabs.forEach(t => t.classList.remove('active'));
-        editor.textContent = defaultText;
+
+        if (editorId === 'editor_projects') {
+            editor.innerHTML = `
+            <div class="project-tiles">
+                <div class="project-tile" onclick="window.open('https://github.com/val8elster/','_blank')">
+                    <img src="assets/bink_dark.png" alt="B-INK" />
+                    <span>B-IN-K</span>
+                </div>
+                <div class="project-tile" onclick="window.open('https://github.com/val8elster/athena-backend','_blank')">
+                    <img src="assets/elster.png" alt="Athena" />
+                    <span>athena</span>
+                </div>
+            </div>
+        `;
+        } else {
+            editor.textContent = defaultText;
+        }
 
         tabs.forEach(t => {
             const close = t.querySelector('.tab-close');
@@ -193,14 +209,14 @@ document.addEventListener('DOMContentLoaded', () => {
         'editor',
         {
             'README.md': `# elster.dev 
-Personal portfolio, infrastructure lab & playground for hardware + AI experiments. 
+Personal portfolio, infrastructure lab & playground for hardware + software experiments. 
 * Built & hosted entirely on my own stack * 
 Written in plain HTML + CSS + JS (no frameworks) 
-* Contains real projects like \`Spooly\`, \`B-IN-K\`, and \`Athena\``,
+* Contains real projects like \`B-IN-K\`, and \`athena\``,
 
             'package.json': `{ 
 "name": "elster.dev", 
-"version": "3.0.0", 
+"version": "3.1.0", 
 "private": true, 
 "scripts": { 
     "deploy": "ftp push ./dist", 
@@ -220,7 +236,6 @@ Written in plain HTML + CSS + JS (no frameworks)
 /drafts/ 
 credentials.txt 
 
-# And sometimes... 
 sleep.log`
 
         },
@@ -263,7 +278,6 @@ sleep.log`
         }
     );
 
-    // LAB window
     initEditorTabs(
         '#lab',
         'editor_lab',
@@ -292,8 +306,7 @@ sleep.log`
             'about.txt': `Name: V. M. 
 Role: Software Engineer / Maker 
 Location: Germany 
-Focus: Automation · Embedded Systems · Self-Hosting · Service Integration
-Motto: "Build it. Host it. Own it."`,
+Focus: Automation · Embedded Systems · Self-Hosting · Service Integration"`,
 
             'license': `license = [
     "code": 'MIT License',
